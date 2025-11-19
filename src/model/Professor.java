@@ -1,13 +1,23 @@
+package model;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Professor {
     private String nome;
     private String matricula;
-    private float salario-base;
+    private String titulacao;
+    private List<Disciplina> disciplinas;
 
-    public Professor(String nome, String matricula, float salarioBase) {
+    public Professor(String nome, String matricula, String titulacao) {
         this.nome = nome;
         this.matricula = matricula;
-        this.salario-base = salarioBase;
+        this.titulacao = titulacao;
+        this.disciplinas = new ArrayList<>();
     }
+
+    // Método abstrato — cada tipo calcula diferente
+    public abstract double calcularSalario();
 
     public String getNome() {
         return nome;
@@ -25,13 +35,19 @@ public abstract class Professor {
         this.matricula = matricula;
     }
 
-    public float getSalarioBase() {
-        return salario-base;
+    public String getTitulacao() {
+        return titulacao;
     }
 
-    public void setSalarioBase(float salarioBase) {
-        this.salario-base = salarioBase;
+    public void setTitulacao(String titulacao) {
+        this.titulacao = titulacao;
     }
 
-    public abstract float calcularSalario();
+    public List<Disciplina> getDisciplinas() {
+        return new ArrayList<>(disciplinas); // retorna cópia para proteger a lista interna
+    }
+
+    public void setDisciplinas(List<Disciplina> disciplinas) {
+        this.disciplinas = disciplinas != null ? new ArrayList<>(disciplinas) : new ArrayList<>();
+    }
 }
