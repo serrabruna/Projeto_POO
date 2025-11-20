@@ -2,7 +2,6 @@ package view;
 
 import controller.DisciplinaController;
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 import model.Aluno;
 import model.Disciplina;
@@ -32,31 +31,38 @@ public class DisciplinaView {
             System.out.print("Opção: ");
             String op = in.nextLine().trim();
             switch (op) {
-                case "1": criarDisciplina(); 
+                case "1": 
+                    criarDisciplina(); 
                 break;
 
-                case "2": listar(); 
+                case "2": 
+                    listar(); 
                 break;
 
-                case "3": editar(); 
+                case "3": 
+                    editar(); 
                 break;
 
-                case "4": remover(); 
+                case "4": 
+                    remover(); 
                 break;
 
-                case "5": registrarAluno(); 
+                case "5": 
+                    registrarAluno();
                 break;
 
-                case "6": visualizarAlunos(); 
+                case "6":
+                    visualizarAlunos(); 
                 break;
 
-                case "7": verificar(); 
+                case "7": 
+                    verificar(); 
                 break;
 
-                case "0": 
-                return;
+                case "0": return;
 
-                default: System.out.println("Opção inválida."); 
+                default:
+                    System.out.println("Opção inválida."); 
                 break;
             }
         }
@@ -69,12 +75,20 @@ public class DisciplinaView {
         String nome = in.nextLine().trim();
         System.out.print("Código: ");
         String codigo = in.nextLine().trim();
-        System.out.print("Carga horária (int): ");
-        int ch = Integer.parseInt(in.nextLine().trim());
+
+        int ch;
+        while (true) {
+            System.out.print("Carga horária (int): ");
+            String chInput = in.nextLine().trim();
+            try {
+                ch = Integer.parseInt(chInput);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Valor inválido. Digite um número inteiro.");
+            }
+        }
 
         Disciplina d;
-        // os construtores em model esperam (String nome, String codigo, int cargaHoraria, Professor professorResponsavel, String alunosMatriculados)
-        // passamos "" para alunosMatriculados porque a implementação atual ignora esse parâmetro e inicializa a lista internamente
         if ("1".equals(tipo)) {
             d = new DisciplinaObrigatoria(nome, codigo, ch, null, "");
         } else {
@@ -98,13 +112,12 @@ public class DisciplinaView {
     private void editar() {
         System.out.print("Código da disciplina a editar: ");
         String codigo = in.nextLine().trim();
-        Optional<Disciplina> opt = controller.buscarPorCodigo(codigo);
-        if (!opt.isPresent()) {
+        Disciplina d = controller.buscarPorCodigo(codigo);
+        if (d == null) {
             System.out.println("Disciplina não encontrada.");
             return;
         }
 
-        Disciplina d = opt.get();
         System.out.print("Novo nome (enter para manter: " + d.getNome() + "): ");
         String nome = in.nextLine().trim();
         if (nome.isEmpty()) nome = d.getNome();
@@ -113,7 +126,6 @@ public class DisciplinaView {
         String chLine = in.nextLine().trim();
         int ch = chLine.isEmpty() ? d.getCargaHoraria() : Integer.parseInt(chLine);
 
-        // preferimos editar o objeto existente (não substituir com um construtor incompatível)
         d.editarDisciplina(nome, ch, d.getProfessorResponsavel());
         System.out.println("Disciplina atualizada.");
     }
@@ -133,7 +145,6 @@ public class DisciplinaView {
         System.out.print("Matrícula do aluno: ");
         String matricula = in.nextLine().trim();
 
-        // modelo Aluno tem construtor (String nome, String matricula, String disciplina)
         Aluno a = new Aluno(nome, matricula, codigo);
 
         boolean ok = controller.registrarAluno(codigo, a);
@@ -152,7 +163,6 @@ public class DisciplinaView {
         controller.verificarDisciplina(codigo);
     }
 
-    // para testar rapidamente
     public static void main(String[] args) {
         new DisciplinaView().menu();
     }

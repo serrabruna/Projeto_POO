@@ -6,7 +6,7 @@ public class DisciplinaObrigatoria extends Disciplina {
     }
 
     public boolean verificarCargaHoraria(){
-        // ajuste o valor mínimo conforme o enunciado do PDF (ex.: 30 ou 60)
+        // ajuste o valor mínimo conforme o enunciado
         int minimo = 30;
         return getCargaHoraria() >= minimo;
     }
@@ -17,7 +17,7 @@ public class DisciplinaObrigatoria extends Disciplina {
 
     @Override
     public void verificarDisciplina() {
-       boolean cargaOk = verificarCargaHoraria();
+        boolean cargaOk = verificarCargaHoraria();
         boolean profOk = verificarProfessor();
         System.out.printf("Verificação (%s): cargaOk=%b, profOk=%b%n", getNome(), cargaOk, profOk);
     }

@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.List;
-import java.util.Optional;
 import model.Aluno;
 import model.Disciplina;
 import repository.DisciplinaRepository;
@@ -21,7 +20,8 @@ public class DisciplinaController {
         return repo.listarDisciplinas();
     }
 
-    public Optional<Disciplina> buscarPorCodigo(String codigo){
+    // retorna Disciplina ou nulo
+    public Disciplina buscarPorCodigo(String codigo){
         return repo.buscarPorCodigo(codigo);
     }
 
@@ -34,10 +34,8 @@ public class DisciplinaController {
     }
 
     public boolean registrarAluno(String codigoDisciplina, Aluno aluno){
-        Optional<Disciplina> opt = repo.buscarPorCodigo(codigoDisciplina);
-        if (opt.isPresent()){
-            Disciplina d = opt.get();
-            // assume Disciplina tem método adicionarAluno(Aluno)
+        Disciplina d = repo.buscarPorCodigo(codigoDisciplina);
+        if (d != null){
             d.adicionarAluno(aluno);
             return true;
         }
@@ -45,12 +43,20 @@ public class DisciplinaController {
     }
 
     public void visualizarAlunosMatriculados(String codigoDisciplina){
-        Optional<Disciplina> opt = repo.buscarPorCodigo(codigoDisciplina);
-        opt.ifPresent(d -> d.visualizarAlunosMatriculados());
+        Disciplina d = repo.buscarPorCodigo(codigoDisciplina);
+        if (d != null) {
+            d.visualizarAlunosMatriculados();
+        } else {
+            System.out.println("Disciplina não encontrada.");
+        }
     }
 
     public void verificarDisciplina(String codigoDisciplina){
-        Optional<Disciplina> opt = repo.buscarPorCodigo(codigoDisciplina);
-        opt.ifPresent(d -> d.verificarDisciplina());
+        Disciplina d = repo.buscarPorCodigo(codigoDisciplina);
+        if (d != null) {
+            d.verificarDisciplina();
+        } else {
+            System.out.println("Disciplina não encontrada.");
+        }
     }
 }

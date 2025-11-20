@@ -2,13 +2,13 @@ package repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import model.Disciplina;
 
 public class DisciplinaRepository {
     private List<Disciplina> disciplinas = new ArrayList<>();
 
     public void cadastrarDisciplina(Disciplina d){
+        if (d == null) return;
         disciplinas.add(d);
     }
 
@@ -16,23 +16,28 @@ public class DisciplinaRepository {
         return new ArrayList<>(disciplinas);
     }
 
-    public Optional<Disciplina> buscarPorCodigo(String codigo){
-        return disciplinas.stream().filter(d -> d.getCodigo().equals(codigo)).findFirst();
+    // Retorna Disciplina ou nulo
+    public Disciplina buscarPorCodigo(String codigo){
+        if (codigo == null) return null;
+        for (Disciplina d : disciplinas) {
+            if (codigo.equals(d.getCodigo())) return d;
+        }
+        return null;
     }
 
     public boolean removerPorCodigo(String codigo){
-        Optional<Disciplina> found = buscarPorCodigo(codigo);
-        if (found.isPresent()){
-            disciplinas.remove(found.get());
+        Disciplina found = buscarPorCodigo(codigo);
+        if (found != null){
+            disciplinas.remove(found);
             return true;
         }
         return false;
     }
 
     public boolean editarDisciplina(String codigo, Disciplina nova){
-        Optional<Disciplina> found = buscarPorCodigo(codigo);
-        if (found.isPresent()){
-            int idx = disciplinas.indexOf(found.get());
+        Disciplina found = buscarPorCodigo(codigo);
+        if (found != null){
+            int idx = disciplinas.indexOf(found);
             disciplinas.set(idx, nova);
             return true;
         }
