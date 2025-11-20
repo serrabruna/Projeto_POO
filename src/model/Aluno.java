@@ -35,4 +35,8 @@ public class Aluno {
         this.nome = nome;
     }
 
+    public String getId() {
+        return matricula;
+    }
+
 }

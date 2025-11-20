@@ -1,0 +1,143 @@
+package view;
+
+import controller.AlunoController;
+import java.util.List;
+import java.util.Scanner;
+import model.Aluno;
+import repository.AlunoRepository;
+import repository.DisciplinaRepository;
+
+public class AlunoView {
+    private final AlunoController controller;
+    private final Scanner in = new Scanner(System.in);
+
+    public AlunoView() {
+        this.controller = new AlunoController(new AlunoRepository(), new DisciplinaRepository());
+    }
+
+    public void menu() {
+        while (true) {
+            System.out.println("\n--- Menu Alunos ---");
+            System.out.println("1. Cadastrar aluno");
+            System.out.println("2. Listar alunos");
+            System.out.println("3. Editar aluno");
+            System.out.println("4. Remover aluno");
+            System.out.println("5. Matricular aluno em disciplina");
+            System.out.println("6. Listar alunos por disciplina");
+            System.out.println("0. Sair");
+            System.out.print("Opção: ");
+            String op = in.nextLine().trim();
+            switch (op) {
+                case "1": 
+                    cadastrar(); 
+                break;
+
+                case "2": 
+                    listar(); 
+                break;
+
+                case "3":
+                    editar(); 
+                break;
+
+                case "4":
+                    remover();
+                break;
+
+                case "5":
+                    matricular(); 
+                break;
+
+                case "6": 
+                    listarPorDisciplina();
+                break;
+
+                case "0": return;
+
+                default: 
+                    System.out.println("Opção inválida.");
+                break;
+            }
+        }
+    }
+
+    private void cadastrar() {
+        System.out.print("Nome: ");
+        String nome = in.nextLine().trim();
+        System.out.print("Matrícula: ");
+        String matricula = in.nextLine().trim();
+        System.out.print("Disciplina (código, se houver): ");
+        String disciplina = in.nextLine().trim();
+        Aluno a = new Aluno(nome, matricula, disciplina);
+        controller.cadastrarAluno(a);
+        System.out.println("Aluno cadastrado.");
+    }
+
+    private void listar() {
+        List<Aluno> lista = controller.listarAlunos();
+        if (lista.isEmpty()) {
+            System.out.println("Nenhum aluno cadastrado.");
+            return;
+        }
+        System.out.println();
+        for (Aluno a : lista) {
+            System.out.printf("- %s (%s) Disciplina: %s%n", a.getNome(), a.getMatricula(), a.getDisciplina());
+        }
+    }
+
+    private void editar() {
+        System.out.print("Matrícula do aluno a editar: ");
+        String mat = in.nextLine().trim();
+        Aluno a = controller.buscarPorMatricula(mat);
+        if (a == null) {
+            System.out.println("Aluno não encontrado.");
+            return;
+        }
+
+        System.out.print("Novo nome (enter para manter " + a.getNome() + "): ");
+        String nome = in.nextLine().trim();
+        if (!nome.isEmpty()){
+            a.setNome(nome);
+        }
+
+        System.out.print("Nova disciplina (enter para manter " + a.getDisciplina() + "): ");
+        String d = in.nextLine().trim();
+        if (!d.isEmpty()){
+            a.setDisciplina(d);
+        }
+
+        controller.editarAluno(mat, a);
+        System.out.println("Aluno atualizado.");
+    }
+
+    private void remover() {
+        System.out.print("Matrícula do aluno a remover: ");
+        String mat = in.nextLine().trim();
+        boolean ok = controller.removerPorMatricula(mat);
+        System.out.println(ok ? "Removido." : "Não encontrado.");
+    }
+
+    private void matricular() {
+        System.out.print("Matrícula do aluno: ");
+        String mat = in.nextLine().trim();
+        Aluno a = controller.buscarPorMatricula(mat);
+        if (a == null) {
+            System.out.println("Aluno não encontrado.");
+            return;
+        }
+        System.out.print("Código da disciplina para matrícula: ");
+        String codigo = in.nextLine().trim();
+        boolean ok = controller.matricularEmDisciplina(codigo, a);
+        System.out.println(ok ? "Aluno matriculado na disciplina." : "Erro: disciplina não encontrada.");
+    }
+
+    private void listarPorDisciplina() {
+        System.out.print("Código da disciplina: ");
+        String codigo = in.nextLine().trim();
+        controller.listarAlunosPorDisciplina(codigo);
+    }
+
+    public static void main(String[] args) {
+        new AlunoView().menu();
+    }
+}
