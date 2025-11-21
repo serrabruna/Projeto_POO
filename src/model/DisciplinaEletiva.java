@@ -12,7 +12,7 @@ public class DisciplinaEletiva extends Disciplina{
 
     @Override
     public void verificarDisciplina() {
-       listarDisciplina();
+        listarDisciplina();
     }
 
     public void registrarInteresse(Aluno aluno){

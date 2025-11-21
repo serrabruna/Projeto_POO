@@ -24,11 +24,4 @@ public class ProjetoPesquisa {
     public void setProfessor(String professor) {
         this.professor = professor;
     }
-
-    public void cadastrarProjeto(){
-
-    }
-    public void listarProjeto(){
-        
-    }
 }
