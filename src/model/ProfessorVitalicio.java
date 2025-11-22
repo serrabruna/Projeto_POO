@@ -1,7 +1,6 @@
 package model;
 
 import java.util.List;
-import model.ProjetoPesquisa;
 
 public class ProfessorVitalicio extends Professor {
     private double salarioBase;
@@ -15,7 +14,11 @@ public class ProfessorVitalicio extends Professor {
 
     @Override
     public double calcularSalario() {
-        return salarioBase;
+        if (getTitulacao() != null && getTitulacao().equals("Doutor")) {
+            return getSalarioBase() * 1.20;
+        }
+
+        return getSalarioBase();
     }
 
     @Override

@@ -13,8 +13,8 @@ public class ProfessorView {
     private final ProfessorController controller;
     private final Scanner in = new Scanner(System.in);
 
-    public ProfessorView() {
-        this.controller = new ProfessorController(new ProfessorRepository(), new DisciplinaRepository());
+    public ProfessorView(ProfessorRepository profRepo, DisciplinaRepository discRepo) {
+        this.controller = new ProfessorController(profRepo, discRepo);
     }
 
     public void menu() {
@@ -185,7 +185,4 @@ public class ProfessorView {
         System.out.printf("Salário calculado: %.2f%n", sal);
     }
 
-    public static void main(String[] args) {
-        new ProfessorView().menu();
-    }
 }

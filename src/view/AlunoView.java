@@ -11,8 +11,8 @@ public class AlunoView {
     private final AlunoController controller;
     private final Scanner in = new Scanner(System.in);
 
-    public AlunoView() {
-        this.controller = new AlunoController(new AlunoRepository(), new DisciplinaRepository());
+    public AlunoView(AlunoRepository alunoRepo, DisciplinaRepository discRepo) {
+        this.controller = new AlunoController(alunoRepo, discRepo);
     }
 
     public void menu() {
@@ -120,9 +120,5 @@ public class AlunoView {
         } else {
             System.out.println("Erro: Não foi possível desmatricular (verifique se o aluno realmente estava nesta disciplina).");
         }
-    }
-
-    public static void main(String[] args) {
-        new AlunoView().menu();
     }
 }

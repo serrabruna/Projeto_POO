@@ -12,8 +12,8 @@ public class DisciplinaView {
     private final DisciplinaController controller;
     private final Scanner in = new Scanner(System.in);
 
-    public DisciplinaView() {
-        this.controller = new DisciplinaController(new DisciplinaRepository());
+    public DisciplinaView(DisciplinaRepository discRepo) {
+        this.controller = new DisciplinaController(discRepo);
     }
 
     public void menu() {
@@ -141,9 +141,5 @@ public class DisciplinaView {
         System.out.print("Código da disciplina: ");
         String codigo = in.nextLine().trim();
         controller.verificarDisciplina(codigo);
-    }
-
-    public static void main(String[] args) {
-        new DisciplinaView().menu();
     }
 }
