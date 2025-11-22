@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import model.Professor;
 import model.ProfessorVitalicio;
@@ -28,21 +29,24 @@ public class ProjetoPesquisaController {
             return "Erro: Apenas professores Vitalícios podem orientar projetos de pesquisa.";
         }
 
-        ProjetoPesquisa projeto = new ProjetoPesquisa(nome, p.getNome()); 
+        ProjetoPesquisa projeto = new ProjetoPesquisa(nome, (ProfessorVitalicio) p);
+        ((ProfessorVitalicio) p).adicionarprojetoOrientado(projeto);
         repo.cadastrarProjeto(projeto);
         return "Projeto de pesquisa cadastrado com sucesso.";
     }
 
-    public void listarProjetosPorProfessor(String nomeProfessor) {
-        List<ProjetoPesquisa> todos = repo.listarProjetos();
-        boolean encontrou = false;
-        System.out.println("Projetos do professor " + nomeProfessor + ":");
-        for (ProjetoPesquisa p : todos) {
-            if (p.getProfessor().equalsIgnoreCase(nomeProfessor)) { // Comparando por nome conforme seu model atual
-                System.out.println("- " + p.getNome());
-                encontrou = true;
-            }
+    public List<ProjetoPesquisa> listarProjetosPorProfessor(String matriculaProfessor) {
+        Professor p = profRepo.buscarPorMatricula(matriculaProfessor);
+        
+        if (p == null || !(p instanceof ProfessorVitalicio)) {
+            return new ArrayList<>();
         }
-        if (!encontrou) System.out.println("Nenhum projeto encontrado para este professor.");
+
+        ProfessorVitalicio vitalicio = (ProfessorVitalicio) p;
+        return vitalicio.getProjetosOrientados();
+    }
+
+    public List<ProjetoPesquisa> listarTodosProjetos() {
+        return repo.listarProjetos();
     }
 }
