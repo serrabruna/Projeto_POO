@@ -93,7 +93,7 @@ public class ProfessorView {
                     System.out.println("Valor inválido. Digite um número.");
                 }
             }
-            p = new ProfessorVitalicio(nome, matricula, titulacao, salarioBase);
+            p = new ProfessorVitalicio(nome, matricula, titulacao, salarioBase, new java.util.ArrayList<>());
         } else{ // "2"
             int horasAula;
             while (true) {

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Disciplina;
 import model.Professor;
+import model.ProjetoPesquisa;
 import repository.DisciplinaRepository;
 import repository.ProfessorRepository;
+import model.ProfessorVitalicio;
 
 public class ProfessorController {
     private final ProfessorRepository repo;
@@ -106,5 +108,27 @@ public class ProfessorController {
     public double calcularSalario(String matriculaProfessor) {
         Professor p = repo.buscarPorMatricula(matriculaProfessor);
         return p != null ? p.calcularSalario() : 0.0;
+    }
+
+    public String atribuirProjetoPesquisa(String matriculaProfessor, ProjetoPesquisa projeto){
+        Professor p = repo.buscarPorMatricula(matriculaProfessor);
+
+        if(p == null){
+            return "Professor não encontrado.";
+        }
+
+        if(! (p instanceof ProfessorVitalicio)){
+            return "Apenas Professores Vitalícios podem orientar projetos de pesquisa.";
+        }
+
+        ProfessorVitalicio vitalicio = (ProfessorVitalicio) p;
+        ProjetoPesquisa novoProjeto = new ProjetoPesquisa(projeto.getNome(), vitalicio);
+        vitalicio.adicionarprojetoOrientado(novoProjeto);
+
+        return "Projeto de pesquisa atribuído com sucesso.";
+    }
+
+    public List<ProjetoPesquisa> listarProjetosDeProfessor(String matriculaProfessor){
+        return repo.listarProjetosDeProfessor(matriculaProfessor);
     }
 }

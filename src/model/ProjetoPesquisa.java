@@ -2,26 +2,26 @@ package model;
 
 public class ProjetoPesquisa {
     private String nome;
-    private String professor;
+    private ProfessorVitalicio orientador;
 
-    public ProjetoPesquisa(String nome, String professor) {
+    public ProjetoPesquisa(String nome, ProfessorVitalicio orientador) {
         this.nome = nome;
-        this.professor = professor;
+        this.orientador = orientador;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public String getProfessor() {
-        return professor;
+    public ProfessorVitalicio getOrientador() {
+        return orientador;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public void setProfessor(String professor) {
-        this.professor = professor;
+    public void setOrientador(ProfessorVitalicio orientador) {
+        this.orientador = orientador;
     }
 }

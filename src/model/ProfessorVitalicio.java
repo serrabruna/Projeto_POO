@@ -1,11 +1,16 @@
 package model;
 
+import java.util.List;
+import model.ProjetoPesquisa;
+
 public class ProfessorVitalicio extends Professor {
     private double salarioBase;
+    private List<ProjetoPesquisa> projetosOrientados;
 
-    public ProfessorVitalicio(String nome, String matricula, String titulacao, double salarioBase) {
+    public ProfessorVitalicio(String nome, String matricula, String titulacao, double salarioBase, List<ProjetoPesquisa> projetosOrientados) {
         super(nome, matricula, titulacao);
         this.salarioBase = salarioBase;
+        this.projetosOrientados = projetosOrientados;
     }
 
     @Override
@@ -24,5 +29,17 @@ public class ProfessorVitalicio extends Professor {
 
     public void setSalarioBase(double salarioBase){ 
         this.salarioBase = salarioBase; 
+    }
+
+    public List<ProjetoPesquisa> getProjetosOrientados() {
+        return projetosOrientados;
+    }
+
+    public void setProjetosOrientados(List<ProjetoPesquisa> projetosOrientados) {
+        this.projetosOrientados = projetosOrientados;
+    }
+
+    public void adicionarprojetoOrientado(ProjetoPesquisa projeto){
+        this.projetosOrientados.add(projeto);
     }
 }

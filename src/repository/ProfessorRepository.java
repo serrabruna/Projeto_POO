@@ -3,6 +3,8 @@ package repository;
 import java.util.ArrayList;
 import java.util.List;
 import model.Professor;
+import model.ProjetoPesquisa;
+import model.ProfessorVitalicio;
 
 public class ProfessorRepository {
     private final List<Professor> professores = new ArrayList<>();
@@ -43,5 +45,20 @@ public class ProfessorRepository {
             return true;
         }
         return false;
+    }
+
+    public List<ProjetoPesquisa> listarProjetosDeProfessor(String matricula){
+        Professor p = buscarPorMatricula(matricula);
+
+        if(p == null){
+            return new ArrayList<>();
+        }
+
+        if(p instanceof ProfessorVitalicio){
+            ProfessorVitalicio vitalicio = (ProfessorVitalicio) p;
+            return vitalicio.getProjetosOrientados();
+        }else{
+            return new ArrayList<>();
+        }
     }
 }
