@@ -20,14 +20,12 @@ public class ProfessorView {
     public void menu() {
         while (true) {
             System.out.println();
-            System.out.println("--- Menu Professores ---");
+            System.out.println("--- 1. Professores ---");
             System.out.println("1. Cadastrar professor");
             System.out.println("2. Listar professores");
             System.out.println("3. Editar professor");
             System.out.println("4. Remover professor");
-            System.out.println("5. Atribuir disciplina a professor");
-            System.out.println("6. Listar disciplinas de um professor");
-            System.out.println("7. Calcular salário");
+            System.out.println("5. Calcular salário");
             System.out.println("0. Sair");
             System.out.print("Opção: ");
             String op = in.nextLine().trim();
@@ -49,14 +47,6 @@ public class ProfessorView {
                 break;
 
                 case "5":
-                    atribuir(); 
-                break;
-
-                case "6":
-                    listarDisciplinas();
-                break;
-
-                case "7":
                     calcular();
                 break;
 
@@ -71,7 +61,7 @@ public class ProfessorView {
 
     private void cadastrar() {
         String tipo;
-        // exige escolha válida (1 ou 2)
+
         while (true) {
             System.out.println();
             System.out.println("Cadastrar professor - escolha o tipo");
@@ -104,7 +94,7 @@ public class ProfessorView {
                 }
             }
             p = new ProfessorVitalicio(nome, matricula, titulacao, salarioBase);
-        } else { // "2"
+        } else{ // "2"
             int horasAula;
             while (true) {
                 System.out.print("Horas aula (inteiro): ");
@@ -140,10 +130,12 @@ public class ProfessorView {
         System.out.print("Matrícula do professor a editar: ");
         String mat = in.nextLine().trim();
         Professor p = controller.buscarPorMatricula(mat);
+
         if (p == null) {
             System.out.println("Professor não encontrado");
             return;
         }
+
         System.out.print("Novo nome (enter para manter " + p.getNome() + "): ");
         String nome = in.nextLine().trim();
         if (!nome.isEmpty()) p.setNome(nome);
@@ -184,21 +176,6 @@ public class ProfessorView {
         String mat = in.nextLine().trim();
         boolean ok = controller.removerPorMatricula(mat);
         System.out.println(ok ? "Removido" : "Não encontrado");
-    }
-
-    private void atribuir() {
-        System.out.print("Matrícula do professor: ");
-        String mat = in.nextLine().trim();
-        System.out.print("Código da disciplina: ");
-        String codigo = in.nextLine().trim();
-        boolean ok = controller.atribuirDisciplina(mat, codigo);
-        System.out.println(ok ? "Disciplina atribuída" : "Erro: professor ou disciplina não encontrados");
-    }
-
-    private void listarDisciplinas() {
-        System.out.print("Matrícula do professor: ");
-        String mat = in.nextLine().trim();
-        controller.listarDisciplinasDoProfessor(mat);
     }
 
     private void calcular() {

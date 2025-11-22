@@ -51,6 +51,14 @@ public abstract class Disciplina {
         this.alunosMatriculados = alunosMatriculados != null ? new ArrayList<>(alunos) : new ArrayList<>();
     }
 
+    public boolean removerAluno(Aluno aluno) {
+        if (aluno != null) {
+            return alunosMatriculados.remove(aluno);
+        }
+        
+        return false;
+    }
+
     public int getCargaHoraria() {
         return cargaHoraria;
     }

@@ -28,8 +28,15 @@ public class AlunoController {
         return repo.buscarPorMatricula(matricula);
     }
 
-    public boolean removerPorMatricula(String matricula) {
-        return repo.removerPorMatricula(matricula);
+    public boolean desmatricularAluno(String codigoDisciplina, String matriculaAluno) {
+        Disciplina d = disciplinaRepo.buscarPorCodigo(codigoDisciplina);
+        Aluno a = repo.buscarPorMatricula(matriculaAluno);
+
+        if (d != null && a != null) {
+            return d.removerAluno(a);
+        }
+
+        return false;
     }
 
     public boolean editarAluno(String matricula, Aluno novo) {

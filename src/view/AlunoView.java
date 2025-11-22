@@ -17,13 +17,11 @@ public class AlunoView {
 
     public void menu() {
         while (true) {
-            System.out.println("\n--- Menu Alunos ---");
+            System.out.println("\n--- 3. Alunos ---");
             System.out.println("1. Cadastrar aluno");
             System.out.println("2. Listar alunos");
             System.out.println("3. Editar aluno");
-            System.out.println("4. Remover aluno");
-            System.out.println("5. Matricular aluno em disciplina");
-            System.out.println("6. Listar alunos por disciplina");
+            System.out.println("4. Desmatricular aluno de disciplina");
             System.out.println("0. Sair");
             System.out.print("Opção: ");
             String op = in.nextLine().trim();
@@ -41,15 +39,7 @@ public class AlunoView {
                 break;
 
                 case "4":
-                    remover();
-                break;
-
-                case "5":
-                    matricular(); 
-                break;
-
-                case "6": 
-                    listarPorDisciplina();
+                    desmatricular();
                 break;
 
                 case "0": return;
@@ -110,31 +100,26 @@ public class AlunoView {
         System.out.println("Aluno atualizado.");
     }
 
-    private void remover() {
-        System.out.print("Matrícula do aluno a remover: ");
-        String mat = in.nextLine().trim();
-        boolean ok = controller.removerPorMatricula(mat);
-        System.out.println(ok ? "Removido." : "Não encontrado.");
-    }
-
-    private void matricular() {
+    private void desmatricular() {
         System.out.print("Matrícula do aluno: ");
         String mat = in.nextLine().trim();
+    
         Aluno a = controller.buscarPorMatricula(mat);
         if (a == null) {
             System.out.println("Aluno não encontrado.");
             return;
         }
-        System.out.print("Código da disciplina para matrícula: ");
-        String codigo = in.nextLine().trim();
-        boolean ok = controller.matricularEmDisciplina(codigo, a);
-        System.out.println(ok ? "Aluno matriculado na disciplina." : "Erro: disciplina não encontrada.");
-    }
 
-    private void listarPorDisciplina() {
-        System.out.print("Código da disciplina: ");
+        System.out.print("Código da disciplina para remover matrícula: ");
         String codigo = in.nextLine().trim();
-        controller.listarAlunosPorDisciplina(codigo);
+
+        boolean ok = controller.desmatricularAluno(codigo, mat);
+    
+        if (ok) {
+            System.out.println("Sucesso: Aluno desmatriculado da disciplina.");
+        } else {
+            System.out.println("Erro: Não foi possível desmatricular (verifique se o aluno realmente estava nesta disciplina).");
+        }
     }
 
     public static void main(String[] args) {

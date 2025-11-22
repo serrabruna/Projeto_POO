@@ -3,7 +3,6 @@ package view;
 import controller.DisciplinaController;
 import java.util.List;
 import java.util.Scanner;
-import model.Aluno;
 import model.Disciplina;
 import model.DisciplinaEletiva;
 import model.DisciplinaObrigatoria;
@@ -19,14 +18,13 @@ public class DisciplinaView {
 
     public void menu() {
         while (true) {
-            System.out.println("\n--- Menu Disciplinas ---");
+            System.out.println("\n--- 2. Disciplinas ---");
             System.out.println("1. Cadastrar disciplina");
             System.out.println("2. Listar disciplinas");
             System.out.println("3. Editar disciplina");
             System.out.println("4. Remover disciplina");
-            System.out.println("5. Registrar aluno em disciplina");
-            System.out.println("6. Visualizar alunos matriculados");
-            System.out.println("7. Verificar disciplina");
+            System.out.println("5. Visualizar alunos matriculados");
+            System.out.println("6. Verificar disciplina");
             System.out.println("0. Sair");
             System.out.print("Opção: ");
             String op = in.nextLine().trim();
@@ -47,15 +45,11 @@ public class DisciplinaView {
                     remover(); 
                 break;
 
-                case "5": 
-                    registrarAluno();
-                break;
-
-                case "6":
+                case "5":
                     visualizarAlunos(); 
                 break;
 
-                case "7": 
+                case "6": 
                     verificar(); 
                 break;
 
@@ -135,20 +129,6 @@ public class DisciplinaView {
         String codigo = in.nextLine().trim();
         boolean ok = controller.removerPorCodigo(codigo);
         System.out.println(ok ? "Removida." : "Não encontrada.");
-    }
-
-    private void registrarAluno() {
-        System.out.print("Código da disciplina: ");
-        String codigo = in.nextLine().trim();
-        System.out.print("Nome do aluno: ");
-        String nome = in.nextLine().trim();
-        System.out.print("Matrícula do aluno: ");
-        String matricula = in.nextLine().trim();
-
-        Aluno a = new Aluno(nome, matricula, codigo);
-
-        boolean ok = controller.registrarAluno(codigo, a);
-        System.out.println(ok ? "Aluno registrado." : "Disciplina não encontrada.");
     }
 
     private void visualizarAlunos() {

@@ -19,6 +19,12 @@ public abstract class Professor {
     // Método abstrato — cada tipo calcula diferente
     public abstract double calcularSalario();
 
+    public abstract int getLimiteDisciplinas();
+
+    public boolean podeAdicionarDisciplina() {
+        return getDisciplinas().size() < getLimiteDisciplinas();
+    }
+
     public String getNome() {
         return nome;
     }

@@ -37,11 +37,23 @@ public class ProfessorController {
         return repo.editarProfessor(matricula, novo);
     }
 
-    // atribui disciplina ao professor e marca professor como responsável na disciplina
-    public boolean atribuirDisciplina(String matriculaProfessor, String codigoDisciplina) {
+    public String atribuirDisciplina(String matriculaProfessor, String codigoDisciplina) {
         Professor prof = repo.buscarPorMatricula(matriculaProfessor);
         Disciplina disc = disciplinaRepo.buscarPorCodigo(codigoDisciplina);
-        if (prof == null || disc == null) return false;
+
+        if (prof == null || disc == null){
+            return "Professor ou Disciplina não foi encontrado.";
+        }
+
+        // Validação: Disciplina já tem professor? 
+        if (disc.getProfessorResponsavel() != null) {
+            return "Erro: A disciplina já possui um professor responsável.";
+        }
+
+        // Validação: Limite de disciplinas do professor
+        if (!prof.podeAdicionarDisciplina()) {
+            return "Erro: O professor atingiu o limite de disciplinas (" + prof.getLimiteDisciplinas() + ").";
+        }
 
         List<Disciplina> atual = prof.getDisciplinas();
         if (atual == null) atual = new ArrayList<>();
@@ -51,10 +63,34 @@ public class ProfessorController {
             prof.setDisciplinas(atual);
         }
 
+        // Atualiza o lado da disciplina
         disc.editarDisciplina(disc.getNome(), disc.getCargaHoraria(), prof);
-        return true;
+        return "Disciplina atribuída com sucesso!";
     }
 
+    public boolean removerDisciplinaDeProfessor(String matriculaProfessor, String codigoDisciplina) {
+        Professor prof = repo.buscarPorMatricula(matriculaProfessor);
+        Disciplina disc = disciplinaRepo.buscarPorCodigo(codigoDisciplina);
+
+        if (prof == null || disc == null) return false;
+
+        List<Disciplina> disciplinasProf = prof.getDisciplinas();
+        
+        // Remove da lista do professor
+        // Precisamos encontrar o objeto disciplina correto na lista ou usar equals/remove
+        boolean removido = disciplinasProf.removeIf(d -> d.getCodigo().equals(codigoDisciplina));
+        
+        if (removido) {
+            prof.setDisciplinas(disciplinasProf);
+            // Remove o vínculo na disciplina (seta professor como null)
+            if (disc.getProfessorResponsavel() != null && disc.getProfessorResponsavel().getMatricula().equals(matriculaProfessor)) {
+                disc.editarDisciplina(disc.getNome(), disc.getCargaHoraria(), null);
+            }
+            return true;
+        }
+        return false;
+    }
+    
     public void listarDisciplinasDoProfessor(String matriculaProfessor) {
         Professor p = repo.buscarPorMatricula(matriculaProfessor);
         if (p == null) {

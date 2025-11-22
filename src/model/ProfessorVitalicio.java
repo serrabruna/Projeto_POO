@@ -8,16 +8,21 @@ public class ProfessorVitalicio extends Professor {
         this.salarioBase = salarioBase;
     }
 
+    @Override
+    public double calcularSalario() {
+        return salarioBase;
+    }
+
+    @Override
+    public int getLimiteDisciplinas() {
+        return 3; // Regra definida no PDF 
+    }
+
     public double getSalarioBase(){
         return salarioBase; 
     }
 
     public void setSalarioBase(double salarioBase){ 
         this.salarioBase = salarioBase; 
-    }
-
-    @Override
-    public double calcularSalario() {
-        return salarioBase;
     }
 }
