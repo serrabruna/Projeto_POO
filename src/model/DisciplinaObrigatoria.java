@@ -20,6 +20,6 @@ public class DisciplinaObrigatoria extends Disciplina {
         boolean cargaOk = verificarCargaHoraria();
         boolean profOk = verificarProfessor();
         System.out.printf("Verificação (%s): cargaOk=%b, profOk=%b%n", getNome(), cargaOk, profOk);
+        listarDisciplina();
     }
-    
 }
