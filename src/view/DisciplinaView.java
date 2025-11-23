@@ -83,11 +83,12 @@ public class DisciplinaView {
         }
 
         Disciplina d;
-        if ("1".equals(tipo)) {
+        if("1".equals(tipo)) {
             d = new DisciplinaObrigatoria(nome, codigo, ch, null, "");
-        } else {
+        } else{
             d = new DisciplinaEletiva(nome, codigo, ch, null, "");
         }
+
         controller.cadastrarDisciplina(d);
         System.out.println("Disciplina cadastrada.");
     }

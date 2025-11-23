@@ -20,7 +20,9 @@ public class AlunoRepository {
     public Aluno buscarPorMatricula(String matricula) {
         if (matricula == null) return null;
         for (Aluno a : alunos) {
-            if (matricula.equals(a.getMatricula())) return a;
+            if (matricula.equals(a.getMatricula())){
+                return a;
+            }
         }
         return null;
     }

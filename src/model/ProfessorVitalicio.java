@@ -1,5 +1,4 @@
 package model;
-
 import java.util.List;
 
 public class ProfessorVitalicio extends Professor {
@@ -23,7 +22,7 @@ public class ProfessorVitalicio extends Professor {
 
     @Override
     public int getLimiteDisciplinas() {
-        return 3; // Regra definida no PDF 
+        return 3; // Regra definida no PDF
     }
 
     public double getSalarioBase(){

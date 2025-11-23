@@ -10,7 +10,6 @@ public class ProfessorRepository {
     private final List<Professor> professores = new ArrayList<>();
 
     public void cadastrarProfessor(Professor p) {
-        if (p == null) return;
         professores.add(p);
     }
 
@@ -18,7 +17,7 @@ public class ProfessorRepository {
         return new ArrayList<>(professores);
     }
 
-    // retorna Professor ou null
+    // retorna Professor ou nulo
     public Professor buscarPorMatricula(String matricula) {
         for (Professor p : professores) {
             if (p.getMatricula().equals(matricula)){
@@ -57,7 +56,7 @@ public class ProfessorRepository {
         if(p instanceof ProfessorVitalicio){
             ProfessorVitalicio vitalicio = (ProfessorVitalicio) p;
             return vitalicio.getProjetosOrientados();
-        }else{
+        } else{
             return new ArrayList<>();
         }
     }
