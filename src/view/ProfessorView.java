@@ -69,8 +69,10 @@ public class ProfessorView {
             System.out.println("2 Substituto");
             System.out.print("Tipo (1 ou 2): ");
             tipo = in.nextLine().trim();
-            if ("1".equals(tipo) || "2".equals(tipo)) break;
-            System.out.println("Opção inválida. Digite 1 para Vitalício ou 2 para Substituto.");
+            if ("1".equals(tipo) || "2".equals(tipo)){
+                System.out.println("Opção inválida. Digite 1 para Vitalício ou 2 para Substituto.");
+                break;
+            } 
         }
 
         System.out.print("Nome: ");
@@ -94,7 +96,7 @@ public class ProfessorView {
                 }
             }
             p = new ProfessorVitalicio(nome, matricula, titulacao, salarioBase, new java.util.ArrayList<>());
-        } else{ // "2"
+        } else{
             int horasAula;
             while (true) {
                 System.out.print("Horas aula (inteiro): ");
@@ -121,7 +123,7 @@ public class ProfessorView {
         }
         System.out.println();
         for (Professor p : lista) {
-            System.out.printf("- %s (%s) Titulação: %s - Salário: R$ %.2f - Disciplinas: %d%n",
+            System.out.printf("- Nome: %s (%s) Titulação: %s - Salário: R$ %.2f - Disciplinas: %d%n",
                 p.getNome(), p.getMatricula(), p.getTitulacao(), p.calcularSalario(), p.getDisciplinas().size());
         }
     }
@@ -138,11 +140,15 @@ public class ProfessorView {
 
         System.out.print("Novo nome (enter para manter " + p.getNome() + "): ");
         String nome = in.nextLine().trim();
-        if (!nome.isEmpty()) p.setNome(nome);
+        if (!nome.isEmpty()){
+            p.setNome(nome);
+        }
 
         System.out.print("Nova titulação (enter para manter " + p.getTitulacao() + "): ");
         String tit = in.nextLine().trim();
-        if (!tit.isEmpty()) p.setTitulacao(tit);
+        if (!tit.isEmpty()){
+            p.setTitulacao(tit);
+        }
 
         if (p instanceof ProfessorVitalicio) {
             ProfessorVitalicio pv = (ProfessorVitalicio) p;

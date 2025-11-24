@@ -22,8 +22,7 @@ public class AlunoController {
     public List<Aluno> listarAlunos() {
         return repo.listarAlunos();
     }
-
-    // retorna Aluno ou nulo
+    
     public Aluno buscarPorMatricula(String matricula) {
         return repo.buscarPorMatricula(matricula);
     }

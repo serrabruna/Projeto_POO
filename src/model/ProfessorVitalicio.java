@@ -13,7 +13,7 @@ public class ProfessorVitalicio extends Professor {
 
     @Override
     public double calcularSalario() {
-        if (getTitulacao() != null && getTitulacao().equals("Doutor")) {
+        if (getTitulacao() != null && (getTitulacao().equals("Doutor") || getTitulacao().equals("doutor")) ){
             return getSalarioBase() * 1.20;
         }
 
