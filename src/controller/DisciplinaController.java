@@ -92,4 +92,8 @@ public class DisciplinaController {
             }
         }
     }
+
+    public List<Disciplina> gerarRelatorioDisciplina() {
+        return repo.listarDisciplinas();
+    }
 }

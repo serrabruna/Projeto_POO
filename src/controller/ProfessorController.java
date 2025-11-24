@@ -131,4 +131,8 @@ public class ProfessorController {
     public List<ProjetoPesquisa> listarProjetosDeProfessor(String matriculaProfessor){
         return repo.listarProjetosDeProfessor(matriculaProfessor);
     }
+
+    public List<Professor> gerarRelatorioProfessor() {
+        return repo.listarProfessores();
+    }
 }

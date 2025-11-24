@@ -15,6 +15,7 @@ public class Main {
 
         ProjetoPesquisaView projetoPesquisaView = new ProjetoPesquisaView(profRepo, discRepo, projetoRepo);
         EletivasView eletivasView = new EletivasView(discRepo, alunoRepo);
+        RelatorioView relatorioView = new RelatorioView(profRepo, discRepo);
 
         try (Scanner in = new Scanner(System.in)) {
             while (true) {
@@ -52,6 +53,8 @@ public class Main {
                         eletivasView.menu();
                     break;
 
+                    case "6":
+                        relatorioView.menu();
                     case "0": 
                         System.out.println("Encerrando sistema...");
                     return;
