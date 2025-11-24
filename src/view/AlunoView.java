@@ -1,6 +1,7 @@
 package view;
 
 import controller.AlunoController;
+
 import java.util.List;
 import java.util.Scanner;
 import model.Aluno;
@@ -65,6 +66,15 @@ public class AlunoView {
         String disciplina = in.nextLine().trim();
         Aluno a = new Aluno(nome, matricula, disciplina);
         controller.cadastrarAluno(a);
+        
+        boolean ok = controller.matricularEmDisciplina(disciplina, a);
+        
+        if (ok){
+            System.out.println("Sucesso: Aluno matriculado na disciplina.");
+        } else{
+            System.out.println("Erro: Disciplina não encontrada.");
+        }
+
         System.out.println("Aluno cadastrado.");
     }
 

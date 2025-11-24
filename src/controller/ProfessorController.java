@@ -26,7 +26,6 @@ public class ProfessorController {
         return repo.listarProfessores();
     }
 
-    // retorna Professor ou null
     public Professor buscarPorMatricula(String matricula) {
         return repo.buscarPorMatricula(matricula);
     }
@@ -47,12 +46,10 @@ public class ProfessorController {
             return "Professor ou Disciplina não foi encontrado.";
         }
 
-        // Validação: Disciplina já tem professor? 
         if (disc.getProfessorResponsavel() != null) {
             return "Erro: A disciplina já possui um professor responsável.";
         }
 
-        // Validação: Limite de disciplinas do professor
         if (!prof.podeAdicionarDisciplina()) {
             return "Erro: O professor atingiu o limite de disciplinas (" + prof.getLimiteDisciplinas() + ").";
         }
