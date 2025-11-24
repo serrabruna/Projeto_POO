@@ -3,6 +3,8 @@ package view;
 import controller.ProfessorController;
 import controller.ProjetoPesquisaController;
 import java.util.Scanner;
+import java.util.List;
+import model.ProjetoPesquisa;
 import repository.DisciplinaRepository;
 import repository.ProfessorRepository;
 import repository.ProjetoPesquisaRepository;
@@ -87,8 +89,18 @@ public class ProjetoPesquisaView {
     }
 
     private void listarProjetos() {
-        System.out.print("Nome do professor: ");
-        String nome = in.nextLine().trim();
-        projetoController.listarProjetosPorProfessor(nome);
+        System.out.print("Matricula do Professor: ");
+        String mat = in.nextLine().trim();
+
+        List<ProjetoPesquisa> projetos = projetoController.listarProjetosPorProfessor(mat);
+
+        if(projetos.isEmpty()) {
+            System.out.println("Nenhum projeto encontrado para este professor ou professor não é vitalício.");
+        } 
+
+        System.out.println("\nProjetos Encontrados: ");
+        for (ProjetoPesquisa projeto : projetos) {
+            System.out.printf("- %s (Orientador: %s)%n", projeto.getNome(), projeto.getOrientador().getNome());
+        }
     }
 }
