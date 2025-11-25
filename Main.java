@@ -16,6 +16,7 @@ public class Main {
         ProjetoPesquisaView projetoPesquisaView = new ProjetoPesquisaView(profRepo, discRepo, projetoRepo);
         EletivasView eletivasView = new EletivasView(discRepo, alunoRepo);
         RelatorioView relatorioView = new RelatorioView(profRepo, discRepo);
+        AjudaSobreView ajudaSobreView = new AjudaSobreView();
 
         try (Scanner in = new Scanner(System.in)) {
             while (true) {
@@ -27,7 +28,7 @@ public class Main {
                 System.out.println("5. Eletivas");
                 System.out.println("6. Relatórios");
                 System.out.println("7. Ajuda / Sobre");
-                System.out.println("0. Sair");
+                System.out.println("8. Sair");
                 System.out.print("Escolha uma opção: ");
 
                 String opcao = in.nextLine().trim();
@@ -55,7 +56,12 @@ public class Main {
 
                     case "6":
                         relatorioView.menu();
-                    case "0": 
+                    break;
+
+                    case "7":
+                        ajudaSobreView.menu();
+                    break;
+                    case "8": 
                         System.out.println("Encerrando sistema...");
                     return;
 
