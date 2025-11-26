@@ -91,5 +91,5 @@ src/
 -----
 
 *Projeto desenvolvido para a disciplina do Prof. Dr. Anisio Silva - Novembro/2025.*
-Desenvolvido por Vinicius Araújo Domingues e Bruna Serra Amorim
+Desenvolvido por Bruna Serra Amorim e Vinicius Araújo Domingues.
 
