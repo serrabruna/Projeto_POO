@@ -74,4 +74,8 @@ public abstract class Disciplina {
     public Professor getProfessorResponsavel() {
         return professorResponsavel;
     }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
 }

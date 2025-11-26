@@ -16,21 +16,28 @@ public class DisciplinaRepository {
         return new ArrayList<>(disciplinas);
     }
 
-    // Retorna Disciplina ou nulo
     public Disciplina buscarPorCodigo(String codigo){
-        if (codigo == null) return null;
-        for (Disciplina d : disciplinas) {
-            if (codigo.equals(d.getCodigo())) return d;
+        if (codigo == null){
+            return null;
         }
+
+        for (Disciplina d : disciplinas) {
+            if (codigo.equals(d.getCodigo())){
+                return d;
+            }
+        }
+
         return null;
     }
 
     public boolean removerPorCodigo(String codigo){
         Disciplina found = buscarPorCodigo(codigo);
+
         if (found != null){
             disciplinas.remove(found);
             return true;
         }
+        
         return false;
     }
 
@@ -42,5 +49,13 @@ public class DisciplinaRepository {
             return true;
         }
         return false;
+    }
+
+    public List<Disciplina> getDisciplinas() {
+        return disciplinas;
+    }
+
+    public void setDisciplinas(List<Disciplina> disciplinas) {
+        this.disciplinas = disciplinas;
     }
 }

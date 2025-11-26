@@ -74,10 +74,10 @@ public class DisciplinaController {
             return "Aluno não encontrado";
         }
 
-        if (d instanceof DisciplinaEletiva) {
+        if(d instanceof DisciplinaEletiva){
             ((DisciplinaEletiva) d).registrarInteresse(a);
             return "Interesse registrado com sucesso para " + a.getNome();
-        } else {
+        } else{
             return "Erro: Esta disciplina não é eletiva.";
         }
     }
@@ -85,7 +85,7 @@ public class DisciplinaController {
     public void relatorioPopularidade() {
         System.out.println("--- Popularidade das Eletivas ---");
         for (Disciplina d : repo.listarDisciplinas()) {
-            if (d instanceof DisciplinaEletiva) {
+            if(d instanceof DisciplinaEletiva){
                 DisciplinaEletiva de = (DisciplinaEletiva) d;
                 System.out.printf("Disciplina: %s (%s) - Popularidade: %d interessados%n", 
                     de.getNome(), de.getCodigo(), de.calcularPopularidade());

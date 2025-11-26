@@ -28,4 +28,12 @@ public class DisciplinaEletiva extends Disciplina{
     public int calcularPopularidade(){
         return interessesRegistrados.size();
     }
+
+    public List<Aluno> getInteressesRegistrados() {
+        return interessesRegistrados;
+    }
+
+    public void setInteressesRegistrados(List<Aluno> interessesRegistrados) {
+        this.interessesRegistrados = interessesRegistrados;
+    }
 }

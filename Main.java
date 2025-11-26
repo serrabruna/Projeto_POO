@@ -33,7 +33,7 @@ public class Main {
 
                 String opcao = in.nextLine().trim();
 
-                switch (opcao) {
+                switch(opcao) {
                     case "1": 
                         profView.menu(); 
                     break;
