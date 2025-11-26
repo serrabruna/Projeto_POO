@@ -60,20 +60,29 @@ public class AlunoView {
     private void cadastrar() {
         System.out.print("Nome: ");
         String nome = in.nextLine().trim();
-        System.out.print("Matrícula: ");
-        String matricula = in.nextLine().trim();
-        System.out.print("Disciplina (código, se houver): ");
-        String disciplina = in.nextLine().trim();
-        Aluno a = new Aluno(nome, matricula, disciplina);
+
+        String matricula;
+        while(true){
+            System.out.print("Matrícula: ");
+            matricula = in.nextLine().trim(); 
+
+            if(controller.buscarPorMatricula(matricula) != null){
+                System.out.println("Já existe um aluno com a matricula " + matricula);
+            } else{
+                break;
+            }
+        }
+        
+        Aluno a = new Aluno(nome, matricula, "");
         controller.cadastrarAluno(a);
         
-        boolean ok = controller.matricularEmDisciplina(disciplina, a);
+        // boolean ok = controller.matricularEmDisciplina(disciplina, a);
         
-        if (ok){
-            System.out.println("Sucesso: Aluno matriculado na disciplina.");
-        } else{
-            System.out.println("Erro: Disciplina não encontrada.");
-        }
+        // if (ok){
+        //     System.out.println("Sucesso: Aluno matriculado na disciplina.");
+        // } else{
+        //     System.out.println("Erro: Disciplina não encontrada.");
+        // }
 
         System.out.println("Aluno cadastrado.");
     }
@@ -86,7 +95,7 @@ public class AlunoView {
         }
         System.out.println();
         for (Aluno a : lista) {
-            System.out.printf("- %s (%s) Disciplina: %s%n", a.getNome(), a.getMatricula(), a.getDisciplina());
+            System.out.printf("- %s (%s) ", a.getNome(), a.getMatricula());
         }
     }
 

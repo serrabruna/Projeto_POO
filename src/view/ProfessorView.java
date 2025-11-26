@@ -69,16 +69,27 @@ public class ProfessorView {
             System.out.println("2 Substituto");
             System.out.print("Tipo (1 ou 2): ");
             tipo = in.nextLine().trim();
-            if ("1".equals(tipo) || "2".equals(tipo)){
+            if("1".equals(tipo) || "2".equals(tipo)){
+                break; 
+            } else{
                 System.out.println("Opção inválida. Digite 1 para Vitalício ou 2 para Substituto.");
-                break;
-            } 
+            }
         }
 
         System.out.print("Nome: ");
         String nome = in.nextLine().trim();
-        System.out.print("Matrícula: ");
-        String matricula = in.nextLine().trim();
+
+        String matricula;
+        while(true){
+            System.out.print("Matrícula: ");
+            matricula = in.nextLine().trim();
+            if(controller.buscarPorMatricula(matricula) != null){
+                System.out.printf("Já existe um professor cadastrado com essa matricula!\n");
+            } else{
+                break;
+            } 
+        }
+        
         System.out.print("Titulação: ");
         String titulacao = in.nextLine().trim();
 

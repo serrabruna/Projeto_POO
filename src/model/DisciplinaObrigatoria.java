@@ -6,8 +6,7 @@ public class DisciplinaObrigatoria extends Disciplina {
     }
 
     public boolean verificarCargaHoraria(){
-        // ajuste o valor mínimo conforme o enunciado
-        int minimo = 30;
+        int minimo = 60;
         return getCargaHoraria() >= minimo;
     }
 

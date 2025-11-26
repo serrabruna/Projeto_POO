@@ -63,20 +63,47 @@ public class DisciplinaView {
     }
 
     private void criarDisciplina() {
-        System.out.print("Tipo (1-Obrigatória, 2-Eletiva): ");
-        String tipo = in.nextLine().trim();
+        String tipo;
+
+        while(true){
+            System.out.print("Tipo (1-Obrigatória, 2-Eletiva): ");
+            tipo = in.nextLine().trim();
+
+            if("1".equals(tipo) || "2".equals(tipo)){
+                break; 
+            } else{
+                System.out.println("Opção inválida. Digite 1 para Obrigatória ou 2 para Eletiva.");
+            }
+        }
+        
         System.out.print("Nome: ");
         String nome = in.nextLine().trim();
-        System.out.print("Código: ");
-        String codigo = in.nextLine().trim();
 
+        String codigo;
+        while(true){
+            System.out.print("Código: ");
+            codigo = in.nextLine().trim();
+
+            if(controller.buscarPorCodigo(codigo) != null){
+                System.out.println("Já existe uma disciplina com o código " + codigo);
+            } else{
+                break;
+            }
+        }
+        
         int ch;
         while (true) {
             System.out.print("Carga horária (int): ");
             String chInput = in.nextLine().trim();
+
             try {
                 ch = Integer.parseInt(chInput);
-                break;
+
+                if(ch < 60 && "1".equals(tipo)){
+                    System.out.println("Esta disciplina precisa ter pelo menos 60 horas para ser Obrigatória! Carga Horaria atual: " + ch);
+                } else{
+                    break;
+                }
             } catch (NumberFormatException e) {
                 System.out.println("Valor inválido. Digite um número inteiro.");
             }
