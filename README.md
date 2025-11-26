@@ -88,21 +88,8 @@ src/
 ├── controller/  # Regras de negócio e comunicação entre View e Model
 └── repository/  # Armazenamento de dados em memória (Listas)
 
-
-## 👥 Autores
-
-| [\<img src="https://avatars.githubusercontent.com/u/seu\_usuario?v=4" width="115"\><br>\<sub\>Bruna Serra\</sub\>](https://www.google.com/search?q=https://github.com/serrabruna) | [\<img src="https://avatars.githubusercontent.com/u/usuario\_vinicius?v=4" width="115"\><br>\<sub\>Vinicius Araujo\</sub\>](https://www.google.com/search?q=https://github.com/seu_vinicius) |
-| :---: | :---: |
-
 -----
 
 *Projeto desenvolvido para a disciplina do Prof. Dr. Anisio Silva - Novembro/2025.*
+Desenvolvido por Vinicius Araújo Domingues e Bruna Serra Amorim
 
-```
-
-### Dica para a imagem:
-1.  Pegue aquele diagrama que você ajustou.
-2.  Salve como `diagrama.png`.
-3.  Faça o upload dele na pasta principal do seu projeto no GitHub.
-4.  No código acima, onde diz `(caminho_para_sua_imagem_aqui.png)`, mude para `(diagrama.png)`.
-```
