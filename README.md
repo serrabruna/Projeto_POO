@@ -42,7 +42,7 @@ O sistema conta com um menu interativo via terminal que oferece as seguintes ope
 
 Abaixo está a representação da modelagem do sistema, destacando o uso de herança e associações.
 
-<img width="1511" height="587" alt="diagrama-trabalho-poo drawio (2)" src="https://github.com/user-attachments/assets/687b94f2-76b1-48ac-8d84-b94a2a441232" />
+<img width="1511" height="587" alt="image" src="https://github.com/user-attachments/assets/c0de8119-30a2-44b0-9d68-b772473f8663" />
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
