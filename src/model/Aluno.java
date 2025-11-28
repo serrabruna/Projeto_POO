@@ -1,18 +1,21 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Aluno {
     private String nome;
     private String matricula;
-    private String disciplina;
+    private List<Disciplina> disciplinas;
 
-    public Aluno(String nome, String matricula, String disciplina) {
-        this.disciplina = disciplina;
+    public Aluno(String nome, String matricula) {
         this.matricula = matricula;
         this.nome = nome;
+        this.disciplinas = new ArrayList<>();
     }
 
-    public String getDisciplina() {
-        return disciplina;
+    public List<Disciplina> getDisciplina() {
+        return disciplinas;
     }
 
     public String getMatricula() {
@@ -23,8 +26,8 @@ public class Aluno {
         return nome;
     }
 
-    public void setDisciplina(String disciplina) {
-        this.disciplina = disciplina;
+    public void setDisciplina(List<Disciplina> disciplina) {
+        this.disciplinas = disciplina;
     }
 
     public void setMatricula(String matricula) {

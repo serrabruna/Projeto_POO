@@ -22,7 +22,7 @@ public class AlunoController {
     public List<Aluno> listarAlunos() {
         return repo.listarAlunos();
     }
-    
+
     public Aluno buscarPorMatricula(String matricula) {
         return repo.buscarPorMatricula(matricula);
     }
@@ -42,11 +42,21 @@ public class AlunoController {
         return repo.editarAluno(matricula, novo);
     }
 
-    // matricula aluno em disciplina (usa instância do repositório de disciplinas)
     public boolean matricularEmDisciplina(String codigoDisciplina, Aluno aluno) {
         Disciplina d = disciplinaRepo.buscarPorCodigo(codigoDisciplina);
-        if (d == null || aluno == null) return false;
+
+        if (d == null || aluno == null)
+            return false;
+
+        for (Disciplina disciplinaDoAluno : aluno.getDisciplina()) {
+            if (disciplinaDoAluno.getCodigo().equalsIgnoreCase(codigoDisciplina)) {
+                return false;
+            }
+        }
+    
         d.adicionarAluno(aluno);
+        aluno.getDisciplina().add(d); 
+    
         return true;
     }
 
